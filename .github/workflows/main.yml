@@ -4,21 +4,20 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  build:  # این اسم تغییر کرد تا با ساختار مطابقت داشته باشد
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         
-      - name: Build final output
+      - name: Create output file
         run: |
-          echo "✅ فایل worker.js دریافت شد"
-          echo "📄 محتویات فایل:"
-          cat worker.js || echo "فایل worker.js پیدا نشد، یک نمونه می‌سازیم"
-          echo "// This is the worker.js content" > worker.js
+          echo "این فایل توسط workflow ساخته شده" > result.txt
+          echo "محتوای دلخواه شما" >> result.txt
+          cat worker.js || echo "worker.js پیدا نشد" >> result.txt
           
-      - name: Upload as artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: downloader-output
-          path: worker.js
+          name: my-output
+          path: result.txt
