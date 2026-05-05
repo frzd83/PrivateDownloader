@@ -1,0 +1,25 @@
+name: Deploy Personal Downloader
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: شبیه‌سازی عملیات Worker
+        run: |
+          echo "✅ فایل worker.js با موفقیت دریافت شد."
+          echo "📄 محتویات فایل:"
+          cat worker.js
+          echo "🚀 در این مرحله، عملیات دانلودر شخصی شما انجام می‌شود."
+          
+      - name: آپلود خروجی نهایی
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-output
+          path: worker.js
